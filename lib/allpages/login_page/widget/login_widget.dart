@@ -21,19 +21,19 @@ class LoginPageView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: size.width,
-        height: size.height,
+        //height: size.height - 50,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "Welcome back",
-              style: GoogleFonts.poppins(
-                  fontSize: 24, fontWeight: FontWeight.bold),
+            SizedBox(
+              height: 20,
             ),
-            SizedBox(height: 40),
-            SvgPicture.asset("assets/images/login.svg"),
-            SizedBox(height: 40),
+            Image.asset(
+              "assets/images/farmer.png",
+              height: 220,
+            ),
+            SizedBox(height: 100),
             LoginWidget1(
               size: size,
               icon: Icon(Icons.mail,
@@ -46,7 +46,7 @@ class LoginPageView extends StatelessWidget {
                   color: MainColors.fromHex(MainColors.colorGreen)),
               name: 'Password',
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 70),
             LoginWidget2(
               size: size,
               name: 'KIRISH',

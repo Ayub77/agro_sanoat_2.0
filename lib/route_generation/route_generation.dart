@@ -4,9 +4,11 @@ import 'package:agro_sanoat/allpages/info_page/info_page.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/big_image_info.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/big_view_info.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/video_pler.dart';
+import 'package:agro_sanoat/allpages/login_page/login_page.dart';
 import 'package:agro_sanoat/allpages/my_info/my_infon.dart';
 import 'package:agro_sanoat/allpages/news_page/widgets/big_image.dart';
 import 'package:agro_sanoat/allpages/news_page/widgets/big_view_news.dart';
+import 'package:agro_sanoat/allpages/person_info/person_info.dart';
 import 'package:agro_sanoat/allpages/splash_page/splash_page.dart';
 import 'package:agro_sanoat/allpages/statistic_page/store_page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,8 @@ class RouteGeneration {
   static const addpage = "/add_page";
   static const statistic = "/store_page";
   static const info = "/info_page";
+  static const login = "/login_page";
+  static const personInfo = "/person_info";
   static const splashpage = "/splash_page";
   static const bigviewinfo = "/big_view_info";
   static const bigviewnews = "/big_view_news";
@@ -36,6 +40,9 @@ class RouteGeneration {
       case statistic:
         return MaterialPageRoute(
             builder: (BuildContext context) => const StorePage());
+      case personInfo:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const PersonInfo());
       case info:
         return MaterialPageRoute(
             builder: (BuildContext context) => const InfoPage());
@@ -51,6 +58,9 @@ class RouteGeneration {
       case myInfo:
         return MaterialPageRoute(
             builder: (BuildContext context) => const MyInfo());
+      case login:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const LoginPage());
       case video:
         return MaterialPageRoute(
             builder: (BuildContext context) => VideoPlyer(videoUrl: args));

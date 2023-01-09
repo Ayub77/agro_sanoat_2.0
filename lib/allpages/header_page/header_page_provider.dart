@@ -75,6 +75,16 @@ class HeaderPageProvidr extends ChangeNotifier {
     notifyListeners();
   }
 
+  nextInfo(context) async {
+    Box box = await Hive.openBox("db");
+    var person = await box.get("person");
+    if (person != null) {
+      Navigator.of(context).pushNamed(RouteGeneration.login);
+    } else {
+      Navigator.of(context).pushNamed(RouteGeneration.personInfo);
+    }
+  }
+
   mapService(value) async {
     loading = true;
     notifyListeners();

@@ -15,12 +15,23 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    double viewInset = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
+      backgroundColor: MainColors.fromHex(MainColors.colorWhite),
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          "Ro'yhatdan o'tish",
+          style: TextStyle(
+              fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: MainColors.fromHex(MainColors.colorGreen),
+        toolbarHeight: 50,
+      ),
       body: Stack(
         children: [
           Positioned(
-              top: 100,
+              top: 150,
               right: -50,
               child: Container(
                 height: 100,
@@ -30,11 +41,11 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(50)),
               )),
           Positioned(
-              top: -50,
-              left: -50,
+              top: 20,
+              left: -40,
               child: Container(
-                height: 200,
-                width: 200,
+                height: 100,
+                width: 100,
                 decoration: BoxDecoration(
                     color: MainColors.fromHex(MainColors.colorGreen),
                     borderRadius: BorderRadius.circular(100)),

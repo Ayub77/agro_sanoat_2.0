@@ -39,9 +39,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: "SfProDisplay",
       ),
-      home: LoginPage(),
-      // initialRoute: RouteGeneration.splashpage,
-      // onGenerateRoute: RouteGeneration.generateRoute,
+      // home: LoginPage(),
+      initialRoute: RouteGeneration.splashpage,
+      onGenerateRoute: RouteGeneration.generateRoute,
     );
   }
 }

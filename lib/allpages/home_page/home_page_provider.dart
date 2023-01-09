@@ -33,7 +33,7 @@ class HomePageProvider extends ChangeNotifier {
   nextAddPage(context) {
     rect = RectGetter.getRectFromKey(rectGetterKey);
     notifyListeners();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       rect = rect!.inflate(1.3 * MediaQuery.of(context).size.longestSide);
       notifyListeners();
       Future.delayed(animationDuration + delay, goToNextPage);
