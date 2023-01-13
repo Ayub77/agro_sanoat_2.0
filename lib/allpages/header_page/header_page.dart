@@ -7,6 +7,7 @@ import 'package:agro_sanoat/allpages/header_page/header_page_provider.dart';
 import 'package:agro_sanoat/allpages/header_page/widget/bottomsheet.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
 import 'package:agro_sanoat/route_generation/route_generation.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -88,57 +89,65 @@ class _HeaderPageState extends State<HeaderPage> {
             child: Column(
               children: [
                 Container(
-                  width: size.width,
-                  height: 550,
-                  margin: EdgeInsets.only(bottom: 10),
-                  child: providr.loading
-                      ? Loading()
-                      : Stack(
-                          children: [
-                            providr.cluster
-                                ? GoogleMap(
-                                    markers: providr.markers,
-                                    onMapCreated:
-                                        (GoogleMapController controller) {
-                                      providr.manager
-                                          ?.setMapId(controller.mapId);
-                                    },
-                                    onCameraMove: providr.manager?.onCameraMove,
-                                    onCameraIdle: providr.manager?.updateMap,
-                                    initialCameraPosition: CameraPosition(
-                                        target: providr.sourselocation,
-                                        zoom: providr.zoom))
-                                : GoogleMap(
-                                    markers: providr.markers,
-                                    initialCameraPosition: CameraPosition(
-                                        target: providr.sourselocation,
-                                        zoom: providr.zoom)),
-                            Visibility(
-                              visible: !providr.switchMap,
-                              child: ClipRect(
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                                  child: Container(
-                                    height: 550,
-                                    width: double.infinity,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                                top: 0,
-                                right: 0,
-                                child: Switch(
-                                    activeColor: MainColors.fromHex(
-                                        MainColors.colorGreen),
-                                    value: providr.switchMap,
-                                    onChanged: (value) {
-                                      providr.mapSwitch(value);
-                                    })),
-                          ],
-                        ),
-                ),
+                    width: size.width,
+                    height: 400,
+                    margin: EdgeInsets.only(bottom: 10),
+                    child: LineChart(
+                      LineChartData(
+                        backgroundColor: Colors.green,
+                      ),
+                      swapAnimationDuration:
+                          Duration(milliseconds: 150), // Optional
+                      swapAnimationCurve: Curves.linear, // Optional
+                    )
+                    // providr.loading
+                    //     ? Loading()
+                    //     : Stack(
+                    //         children: [
+                    //           providr.cluster
+                    //               ? GoogleMap(
+                    //                   markers: providr.markers,
+                    //                   onMapCreated:
+                    //                       (GoogleMapController controller) {
+                    //                     providr.manager
+                    //                         ?.setMapId(controller.mapId);
+                    //                   },
+                    //                   onCameraMove: providr.manager?.onCameraMove,
+                    //                   onCameraIdle: providr.manager?.updateMap,
+                    //                   initialCameraPosition: CameraPosition(
+                    //                       target: providr.sourselocation,
+                    //                       zoom: providr.zoom))
+                    //               : GoogleMap(
+                    //                   markers: providr.markers,
+                    //                   initialCameraPosition: CameraPosition(
+                    //                       target: providr.sourselocation,
+                    //                       zoom: providr.zoom)),
+                    //           Visibility(
+                    //             visible: !providr.switchMap,
+                    //             child: ClipRect(
+                    //               child: BackdropFilter(
+                    //                 filter:
+                    //                     ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                    //                 child: Container(
+                    //                   height: 550,
+                    //                   width: double.infinity,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Positioned(
+                    //               top: 0,
+                    //               right: 0,
+                    //               child: Switch(
+                    //                   activeColor: MainColors.fromHex(
+                    //                       MainColors.colorGreen),
+                    //                   value: providr.switchMap,
+                    //                   onChanged: (value) {
+                    //                     providr.mapSwitch(value);
+                    //                   })),
+                    //         ],
+                    //       ),
+                    ),
                 SizedBox(height: 20),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 20),

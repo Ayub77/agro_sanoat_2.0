@@ -19,6 +19,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class HeaderPageProvidr extends ChangeNotifier {
+  //final List<PricePoint> points=[];
   bool switchMap = false;
   bool loading = true;
   bool cluster = true;
@@ -78,7 +79,7 @@ class HeaderPageProvidr extends ChangeNotifier {
   nextInfo(context) async {
     Box box = await Hive.openBox("db");
     var person = await box.get("person");
-    if (person != null) {
+    if (person == null) {
       Navigator.of(context).pushNamed(RouteGeneration.login);
     } else {
       Navigator.of(context).pushNamed(RouteGeneration.personInfo);

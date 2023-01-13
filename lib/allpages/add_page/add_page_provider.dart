@@ -17,6 +17,8 @@ class AddPageProvider extends ChangeNotifier {
   final FocusNode infoFocus = FocusNode();
   List<UniversalModel> regions = [];
   List<UniversalModel> provins = [];
+  List<String> type = ["Xaridor", "Murojatchi"];
+  String? selectType;
   UniversalModel? selectRegion;
   UniversalModel? selectProvins;
   bool wrongname = false;
@@ -24,6 +26,7 @@ class AddPageProvider extends ChangeNotifier {
   bool wronginfo = false;
   bool wrongProvince = false;
   bool wrongRegion = false;
+  bool wrongType = false;
   bool loading = false;
 
   onStart() async {
@@ -71,6 +74,11 @@ class AddPageProvider extends ChangeNotifier {
         onErrorRegion();
       } else {
         wrongRegion = false;
+      }
+      if (selectType == null) {
+        onErrorType();
+      } else {
+        wrongType = false;
       }
     } else {
       String provinseId = selectProvins!.id.toString();
@@ -152,7 +160,7 @@ class AddPageProvider extends ChangeNotifier {
     Vibration.vibrate(duration: 500);
     for (int i = 0; i < 3; i++) {
       await Future.delayed(const Duration(milliseconds: 100));
-      wrongname = false;
+      //wrongname = false;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 100));
       wrongname = true;
@@ -164,7 +172,7 @@ class AddPageProvider extends ChangeNotifier {
     Vibration.vibrate(duration: 500);
     for (int i = 0; i < 3; i++) {
       await Future.delayed(const Duration(milliseconds: 100));
-      wrongphone = false;
+      // wrongphone = false;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 100));
       wrongphone = true;
@@ -176,7 +184,7 @@ class AddPageProvider extends ChangeNotifier {
     Vibration.vibrate(duration: 500);
     for (int i = 0; i < 3; i++) {
       await Future.delayed(const Duration(milliseconds: 100));
-      wrongProvince = false;
+      //wrongProvince = false;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 100));
       wrongProvince = true;
@@ -188,7 +196,7 @@ class AddPageProvider extends ChangeNotifier {
     Vibration.vibrate(duration: 500);
     for (int i = 0; i < 3; i++) {
       await Future.delayed(const Duration(milliseconds: 100));
-      wrongRegion = false;
+      // wrongRegion = false;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 100));
       wrongRegion = true;
@@ -200,10 +208,22 @@ class AddPageProvider extends ChangeNotifier {
     Vibration.vibrate(duration: 500);
     for (int i = 0; i < 3; i++) {
       await Future.delayed(const Duration(milliseconds: 100));
-      wronginfo = false;
+      // wronginfo = false;
       notifyListeners();
       await Future.delayed(const Duration(milliseconds: 100));
       wronginfo = true;
+      notifyListeners();
+    }
+  }
+
+  onErrorType() async {
+    Vibration.vibrate(duration: 500);
+    for (int i = 0; i < 3; i++) {
+      await Future.delayed(const Duration(milliseconds: 100));
+      // wrongType = false;
+      notifyListeners();
+      await Future.delayed(const Duration(milliseconds: 100));
+      wrongType = true;
       notifyListeners();
     }
   }

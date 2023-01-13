@@ -9,12 +9,13 @@ class LoginWidget1 extends StatelessWidget {
     required this.size,
     required this.name,
     required this.icon,
+    required this.controller,
   }) : super(key: key);
 
   final Size size;
   final String name;
   final Icon icon;
-
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,6 +26,7 @@ class LoginWidget1 extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
           color: MainColors.fromHex(MainColors.colorGreen).withAlpha(50)),
       child: TextField(
+        controller: controller,
         cursorColor: MainColors.fromHex(MainColors.colorGreen),
         decoration: InputDecoration(
             icon: icon, hintText: name, border: InputBorder.none),

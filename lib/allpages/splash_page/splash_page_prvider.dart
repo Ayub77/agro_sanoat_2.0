@@ -22,6 +22,7 @@ class SplashPageProvider extends ChangeNotifier {
     box.put("video", null);
     box.put("st1", null);
     box.put("st2", null);
+    box.put("person", null);
     Timer(const Duration(milliseconds: 400), () {
       a = true;
       notifyListeners();

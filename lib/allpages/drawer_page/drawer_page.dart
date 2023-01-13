@@ -61,6 +61,28 @@ class _DrawerPageState extends State<DrawerPage> {
                 ),
                 ListTile(
                   leading: SvgPicture.asset(
+                    "assets/images/money.svg",
+                    height: 25,
+                    color: MainColors.fromHex(MainColors.colorGreen),
+                  ),
+                  title: Text(
+                    "Daromadlar tarixi",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: MainColors.fromHex(MainColors.colorGreen)),
+                  ),
+                  onTap: () {
+                    // Navigator.pop(context);
+                    // Navigator.of(context).pushNamed(RouteGeneration.info);
+                  },
+                ),
+                Container(
+                  height: 1,
+                  width: double.infinity,
+                  color: Colors.grey.withOpacity(0.2),
+                ),
+                ListTile(
+                  leading: SvgPicture.asset(
                     "assets/images/info.svg",
                     color: MainColors.fromHex(MainColors.colorGreen),
                   ),

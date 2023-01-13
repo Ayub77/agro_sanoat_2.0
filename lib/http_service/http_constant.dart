@@ -2,6 +2,7 @@ class HttpConstant {
   static String mainUrl = "208.85.23.14:8070";
   static String additional = "/api/";
   static String murojat = "${additional}appeals";
+  static String login = "${additional}auth/client-mobile/login";
   static String viloyat = "${additional}regions/mobile";
   static String tuman = "${additional}areas/mobile";
   static String mahalla = "${additional}mahallas/mobile";

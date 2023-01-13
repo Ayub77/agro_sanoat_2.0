@@ -94,9 +94,8 @@ class _AddPageState extends State<AddPage> {
                               showSelectedItems: false,
                               items: provider.regions,
                               dropdownSearchDecoration: InputDecoration(
-                                  labelText: "Viloyatlar",
                                   contentPadding: EdgeInsets.symmetric(
-                                      vertical: 0, horizontal: 17),
+                                      vertical: 15, horizontal: 17),
                                   hintText: "Vilotyatni tanlang",
                                   border: InputBorder.none),
                               selectedItem: provider.selectRegion,
@@ -143,9 +142,8 @@ class _AddPageState extends State<AddPage> {
                               showSelectedItems: false,
                               items: provider.provins,
                               dropdownSearchDecoration: InputDecoration(
-                                  labelText: "Tumanlar",
                                   contentPadding: EdgeInsets.symmetric(
-                                      vertical: 0, horizontal: 17),
+                                      vertical: 15, horizontal: 17),
                                   hintText: "Tumanni tanlang",
                                   border: InputBorder.none),
                               selectedItem: provider.selectProvins,
@@ -171,6 +169,48 @@ class _AddPageState extends State<AddPage> {
                             ),
                           ),
                           SizedBox(height: 20),
+                          Container(
+                            height: 55,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: !provider.wrongType
+                                      ? MainColors.fromHex(MainColors.mainColor)
+                                      : MainColors.fromHex(
+                                          MainColors.colorRed)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: DropdownSearch<String>(
+                              mode: Mode.MENU,
+                              showSelectedItems: false,
+                              items: provider.type,
+                              dropdownSearchDecoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 15, horizontal: 17),
+                                  hintText: "Typeni tanlang",
+                                  border: InputBorder.none),
+                              selectedItem: provider.selectType,
+                              onChanged: (value) {
+                                provider.selectType = value;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Visibility(
+                            visible: provider.wrongType,
+                            child: Text(
+                              "   Iltimos typeni tanlang!",
+                              style: TextStyle(
+                                  color: provider.wrongType
+                                      ? MainColors.fromHex(MainColors.colorRed)
+                                      : MainColors.fromHex("#54BF14"),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Text(
                             "   Telefon raqam",
                             style: TextStyle(
