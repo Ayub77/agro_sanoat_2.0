@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:agro_sanoat/allpages/animation_loading/loading.dart';
 import 'package:agro_sanoat/allpages/person_info/map_marker/map_marker_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +57,29 @@ class _MapMarkerState extends State<MapMarker> {
                       )),
                 ),
               ]),
-          body: GoogleMap(
-              markers: provider.markers,
-              initialCameraPosition:
-                  CameraPosition(target: provider.sourselocation, zoom: 10)),
+          body: provider.loading
+              ? Loading()
+              : Stack(
+                  children: [
+                    GoogleMap(
+                        markers: provider.markers,
+                        initialCameraPosition: CameraPosition(
+                            target: provider.sourselocation, zoom: 10)),
+                    Positioned(
+                        bottom: 30,
+                        left: 30,
+                        child: FloatingActionButton(
+                          onPressed: () {
+                            provider.currentLocation();
+                          },
+                          child: SvgPicture.asset(
+                            "assets/images/location.svg",
+                            height: 25,
+                            color: Colors.white,
+                          ),
+                        ))
+                  ],
+                ),
         ),
       ),
     );

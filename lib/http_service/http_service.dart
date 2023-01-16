@@ -101,6 +101,51 @@ class HttpService {
       return data;
     }
   }
+
+  static PUT(url, body, {params, String? password}) async {
+    try {
+      Map<String, String>? headers;
+      await getHeaders(password: password ?? "").then((value) {
+        headers = value;
+      });
+
+      var response = await http.put(
+        Uri.http(HttpConstant.mainUrl, url, params),
+        headers: headers,
+        body: jsonEncode(body),
+      );
+      if (response.statusCode == 512) {
+        var data = {
+          'status': HttpConnection.none,
+          'data':
+              response.body.isNotEmpty ? jsonDecode(response.body) : response
+        };
+        return data;
+      }
+      if (response.statusCode < 299) {
+        var data = {
+          'status': HttpConnection.data,
+          'data':
+              response.body.isNotEmpty ? jsonDecode(response.body) : response
+        };
+        return data;
+      } else {
+        var data = {
+          'status': HttpConnection.error,
+          'data': jsonDecode(response.body)
+        };
+
+        return data;
+      }
+    } catch (e) {
+      var data = {
+        'status': HttpConnection.none,
+        'data': {'message': "Internet not found"}
+      };
+
+      return data;
+    }
+  }
 }
 
 enum HttpConnection { data, none, error }

@@ -33,7 +33,7 @@ class _JobTypeState extends State<JobType> {
         builder: (context, value, child) => Scaffold(
           backgroundColor: MainColors.fromHex(MainColors.colorWhite),
           appBar: AppBar(
-            toolbarHeight: 40,
+            toolbarHeight: 50,
             backgroundColor: MainColors.fromHex(MainColors.colorGreen),
             elevation: 0,
             centerTitle: true,

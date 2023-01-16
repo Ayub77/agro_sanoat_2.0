@@ -13,13 +13,15 @@ import 'package:agro_sanoat/allpages/news_page/widgets/big_view_news.dart';
 import 'package:agro_sanoat/allpages/person_info/map_marker/map_marker.dart';
 import 'package:agro_sanoat/allpages/person_info/person_info.dart';
 import 'package:agro_sanoat/allpages/splash_page/splash_page.dart';
+import 'package:agro_sanoat/allpages/statistic_page/statistic_page.dart';
 import 'package:agro_sanoat/allpages/statistic_page/store_page.dart';
 import 'package:flutter/material.dart';
 
 class RouteGeneration {
   static const homepage = "/home_page";
   static const addpage = "/add_page";
-  static const statistic = "/store_page";
+  static const store = "/store_page";
+  static const statistic = "/statistic_page";
   static const info = "/info_page";
   static const login = "/login_page";
   static const benefit = "/benefit_page";
@@ -45,7 +47,10 @@ class RouteGeneration {
             builder: (BuildContext context) => const SplashPage());
       case statistic:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const StorePage());
+            builder: (BuildContext context) => const Statistic());
+      case store:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => StorePage(id: args));
       case map_marker:
         return MaterialPageRoute(
             builder: (BuildContext context) => MapMarker(latlng: args));

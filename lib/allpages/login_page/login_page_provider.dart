@@ -24,7 +24,7 @@ class LoginPageProvider extends ChangeNotifier {
       var response = await HttpService.POST(HttpConstant.login, param);
       if (response["status"] == HttpConnection.data) {
         Box box = await Hive.openBox("db");
-        box.put("person", response["data"]);
+        box.put("person", {"login": name, "password": password});
         //Navigator.pop(context);
         AwesomeDialog(
           context: context,
@@ -32,7 +32,7 @@ class LoginPageProvider extends ChangeNotifier {
           dialogType: DialogType.success,
           body: Center(
             child: Text(
-              "Ma'lumotlar muvofaqiyyatli saqlandi",
+              "Muvofaqiyyatli o'tdingiz",
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
             ),

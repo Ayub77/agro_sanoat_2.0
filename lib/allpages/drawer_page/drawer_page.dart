@@ -18,6 +18,13 @@ class _DrawerPageState extends State<DrawerPage> {
   DrawerPageProvider provider = DrawerPageProvider();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    provider.getInfo();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => provider,
@@ -54,27 +61,34 @@ class _DrawerPageState extends State<DrawerPage> {
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 20),
-                Container(
-                  height: 1,
-                  width: double.infinity,
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-                ListTile(
-                  leading: SvgPicture.asset(
-                    "assets/images/money.svg",
-                    height: 25,
-                    color: MainColors.fromHex(MainColors.colorGreen),
+                Visibility(
+                  visible: provider.visible,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 1,
+                        width: double.infinity,
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                      ListTile(
+                        leading: SvgPicture.asset(
+                          "assets/images/money.svg",
+                          height: 27,
+                          color: MainColors.fromHex(MainColors.colorGreen),
+                        ),
+                        title: Text(
+                          "Daromadlar",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: MainColors.fromHex(MainColors.colorGreen)),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.of(context).pushNamed(RouteGeneration.info);
+                        },
+                      ),
+                    ],
                   ),
-                  title: Text(
-                    "Daromadlar tarixi",
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: MainColors.fromHex(MainColors.colorGreen)),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).pushNamed(RouteGeneration.benefit);
-                  },
                 ),
                 Container(
                   height: 1,

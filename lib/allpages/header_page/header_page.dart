@@ -2,6 +2,7 @@
 import 'package:agro_sanoat/allpages/animation_loading/loading.dart';
 import 'package:agro_sanoat/allpages/header_page/header_page_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -68,20 +69,19 @@ class _HeaderPageState extends State<HeaderPage> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
-                        width: size.width,
-                        height: 400,
-                        margin: EdgeInsets.only(bottom: 10),
-                        //color: Colors.yellow,
-                        // child: LineChart(
-                        //   LineChartData(
-                        //     backgroundColor: Colors.green,
-                        //   ),
-                        //   swapAnimationDuration:
-                        //       Duration(milliseconds: 150), // Optional
-                        //   swapAnimationCurve: Curves.linear, // Optional
-                        // )
-                      ),
+                      // Container(
+                      //     width: size.width,
+                      //     height: 400,
+                      //     margin: EdgeInsets.only(bottom: 10),
+                      //     //color: Colors.yellow,
+                      //     child: LineChart(
+                      //       LineChartData(
+                      //         backgroundColor: Colors.green,
+                      //       ),
+                      //       swapAnimationDuration:
+                      //           Duration(milliseconds: 150), // Optional
+                      //       swapAnimationCurve: Curves.linear, // Optional
+                      //     )),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 20),
                         decoration: BoxDecoration(

@@ -52,14 +52,31 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
             actions: [
               Visibility(
                 visible: !provider.textEnebled,
-                child: IconButton(
-                    onPressed: () {
-                      provider.textvisible();
+                child: PopupMenuButton(
+                    icon: SvgPicture.asset("assets/images/menu.svg",
+                        color: MainColors.fromHex(MainColors.colorWhite)),
+                    onSelected: (value) {
+                      provider.selectItem(value, context);
                     },
-                    icon: SvgPicture.asset(
-                      "assets/images/edit.svg",
-                      color: MainColors.fromHex(MainColors.colorWhite),
-                    )),
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                          const PopupMenuItem(
+                            value: 1,
+                            child: Text("Tahrirlash"),
+                          ),
+                          PopupMenuItem(
+                            value: 2,
+                            child: Text("Chiqish"),
+                          ),
+                        ]),
+
+                // child: IconButton(
+                //     onPressed: () {
+                //       provider.textvisible();
+                //     },
+                //     icon: SvgPicture.asset(
+                //       "assets/images/edit.svg",
+                //       color: MainColors.fromHex(MainColors.colorWhite),
+                //     )),
               ),
             ],
           ),
@@ -75,7 +92,7 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                       children: [
                         Container(
                           height: 185,
-                          //width: double.infinity,
+                          width: double.infinity,
                           decoration: BoxDecoration(
                               border: Border.all(
                                   color:
@@ -120,8 +137,11 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: MainColors.fromHex(
-                                        MainColors.colorGreen),
+                                    color: provider.errorName
+                                        ? MainColors.fromHex(
+                                            MainColors.colorRed)
+                                        : MainColors.fromHex(
+                                            MainColors.colorGreen),
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
                             alignment: Alignment.centerLeft,
@@ -217,7 +237,7 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                                 return value!.name.toString();
                               },
                               onChanged: (value) {
-                                provider.selctType = value;
+                                provider.selctNeeds = value;
                               },
                             )),
                         SizedBox(height: 10),
@@ -330,18 +350,21 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                             padding: EdgeInsets.symmetric(horizontal: 15),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: MainColors.fromHex(
-                                        MainColors.colorGreen),
+                                    color: provider.errorPhone
+                                        ? MainColors.fromHex(
+                                            MainColors.colorRed)
+                                        : MainColors.fromHex(
+                                            MainColors.colorGreen),
                                     width: 1.5),
                                 borderRadius: BorderRadius.circular(10)),
-                            alignment: Alignment.centerLeft,
+                            alignment: Alignment.center,
                             child: TextField(
                               controller: provider.phoneController,
                               enabled: provider.textEnebled,
                               keyboardType: TextInputType.phone,
                               inputFormatters: [
                                 MaskTextInputFormatter(
-                                    mask: '+998 (##) ###-##-##',
+                                    mask: '(##) ###-##-##',
                                     filter: {"#": RegExp(r'[0-9]')}),
                               ],
                               scrollPadding: EdgeInsets.all(0),
@@ -386,7 +409,7 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                               Expanded(
                                 child: InkWell(
                                   onTap: () {
-                                    provider.editProfil();
+                                    provider.editProfil(context);
                                   },
                                   child: Container(
                                     height: 40,
@@ -410,6 +433,9 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        )
                       ],
                     ),
                   ),

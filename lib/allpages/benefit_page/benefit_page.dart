@@ -26,7 +26,7 @@ class _BenifitPageState extends State<BenifitPage> {
                     backgroundColor: MainColors.fromHex(MainColors.colorGreen),
                     elevation: 0,
                     centerTitle: true,
-                    toolbarHeight: 40,
+                    toolbarHeight: 50,
                     title: Text(
                       "Daromadlar tarixi",
                       style: TextStyle(

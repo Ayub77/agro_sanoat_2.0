@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapMarkerProvider extends ChangeNotifier {
@@ -6,10 +7,12 @@ class MapMarkerProvider extends ChangeNotifier {
   LatLng sourselocation = const LatLng(40.986374, 69.370742);
   Set<Marker> markers = {};
   bool setEnebled = false;
+  bool loading = true;
   LatLng newLocation = const LatLng(40.986374, 69.370742);
 
   setMarker(LatLng latLng) {
     sourselocation = latLng;
+    markers.clear();
     markers.add(Marker(
         onTap: () {
           print('Tapped');
@@ -22,10 +25,43 @@ class MapMarkerProvider extends ChangeNotifier {
           setEnebled = true;
           notifyListeners();
         })));
+    loading = false;
     notifyListeners();
   }
 
   closePage(context) {
     Navigator.pop(context, newLocation);
+  }
+
+  currentLocation() async {
+    loading = true;
+    notifyListeners();
+
+    var response = await determinePosition();
+    LatLng loc = LatLng(response.latitude, response.longitude);
+    setMarker(loc);
+  }
+
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition();
   }
 }

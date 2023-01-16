@@ -1,14 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:agro_sanoat/allpages/animation_loading/loading.dart';
-import 'package:agro_sanoat/allpages/home_page/home_page_provider.dart';
-import 'package:agro_sanoat/allpages/job_type/job_type.dart';
 import 'package:agro_sanoat/allpages/statistic_page/statistic_page_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
-import 'package:agro_sanoat/route_generation/route_generation.dart';
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'widgets/info_widget.dart';
 
 class StorePage extends StatefulWidget {
-  const StorePage({Key? key}) : super(key: key);
-
+  const StorePage({Key? key, this.id}) : super(key: key);
+  final dynamic id;
   @override
   State<StorePage> createState() => _StorePageState();
 }
@@ -28,7 +23,7 @@ class _StorePageState extends State<StorePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    provider.onStart();
+    provider.chooseChange(widget.id);
   }
 
   @override
@@ -38,72 +33,38 @@ class _StorePageState extends State<StorePage> {
       create: (context) => provider,
       child: Consumer<StatisticPageProvider>(
         builder: (context, value, child) => Scaffold(
-          backgroundColor: MainColors.fromHex(MainColors.colorBack),
-          appBar: AppBar(
-            backgroundColor: MainColors.fromHex(MainColors.colorGreen),
-            elevation: 0,
-            toolbarHeight: 40,
-            centerTitle: true,
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(RouteGeneration.jobType);
-                  },
-                  icon: SvgPicture.asset(
-                    "assets/images/statistic.svg",
-                    height: 16,
-                    color: MainColors.fromHex(MainColors.colorWhite),
-                  ))
-            ],
-            title: Text(
-              "Statistika",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: MainColors.fromHex(MainColors.colorWhite)),
+            backgroundColor: MainColors.fromHex(MainColors.colorBack),
+            appBar: AppBar(
+              backgroundColor: MainColors.fromHex(MainColors.colorGreen),
+              elevation: 0,
+              toolbarHeight: 50,
+              centerTitle: true,
+              // actions: [
+              //   IconButton(
+              //       onPressed: () {
+              //         Navigator.of(context).pushNamed(RouteGeneration.jobType);
+              //       },
+              //       icon: SvgPicture.asset(
+              //         "assets/images/statistic.svg",
+              //         height: 16,
+              //         color: MainColors.fromHex(MainColors.colorWhite),
+              //       ))
+              // ],
+              title: Text(
+                provider.index == 0 ? "Dehqon" : "Fermer",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: MainColors.fromHex(MainColors.colorWhite)),
+              ),
             ),
-          ),
-          body: Container(
-            width: size.width,
-            height: size.height,
-            child: ContainedTabBarView(
-              tabBarProperties: TabBarProperties(
-                  indicatorWeight: 3,
-                  height: 50,
-                  background: Container(
-                    color: MainColors.fromHex(MainColors.colorWhite),
-                  ),
-                  indicatorColor: MainColors.fromHex(MainColors.colorGreen)),
-              tabs: [
-                Text(
-                  'Dehqon',
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: provider.index == 0
-                          ? MainColors.fromHex(MainColors.colorGreen)
-                          : MainColors.fromHex(MainColors.colorGrey)),
-                ),
-                Text(
-                  'Fermer',
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: provider.index == 1
-                          ? MainColors.fromHex(MainColors.colorGreen)
-                          : MainColors.fromHex(MainColors.colorGrey)),
-                ),
-              ],
-              views: [
-                provider.isloading ? Loading() : pieChart(size),
-                provider.isloading1 ? Loading() : pieChart(size),
-              ],
-              onChange: (index) {
-                provider.chooseChange(index);
-              },
-            ),
-          ),
-        ),
+            body: provider.index == 0
+                ? provider.isloading
+                    ? Loading()
+                    : pieChart(size)
+                : provider.isloading1
+                    ? Loading()
+                    : pieChart(size)),
       ),
     );
   }
@@ -159,10 +120,6 @@ class _StorePageState extends State<StorePage> {
                                     PopupMenuItem(
                                       value: 2,
                                       child: Text(provider.farmar + ' soni'),
-                                    ),
-                                    PopupMenuItem(
-                                      value: 3,
-                                      child: Text("Faoliyat turi"),
                                     ),
                                   ]),
                         ],
