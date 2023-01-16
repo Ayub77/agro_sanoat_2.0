@@ -3,7 +3,13 @@ class HttpConstant {
   static String additional = "/api/";
   static String murojat = "${additional}appeals";
   static String login = "${additional}auth/client-mobile/login";
+  static String editPerson = "${additional}farmers/client-mobile/edit";
   static String viloyat = "${additional}regions/mobile";
+  static String job = "${additional}type-of-activities/client-mobile/get";
+  static String typesOfJob = "${additional}map/client-mobile/type-of-activity";
+  static String needs =
+      "${additional}disvantages-and-problems/client-mobile/get";
+  static String type = "${additional}appeals-types/mobile";
   static String tuman = "${additional}areas/mobile";
   static String mahalla = "${additional}mahallas/mobile";
   static String statistikadehqon = "${additional}map/dehqon-pie";
