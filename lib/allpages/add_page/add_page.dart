@@ -2,6 +2,7 @@
 
 import 'package:agro_sanoat/allpages/add_page/add_page_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
+import 'package:agro_sanoat/object/type_model.dart';
 import 'package:agro_sanoat/object/universal.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -180,7 +181,7 @@ class _AddPageState extends State<AddPage> {
                                           MainColors.colorRed)),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: DropdownSearch<String>(
+                            child: DropdownSearch<TypeModel>(
                               mode: Mode.MENU,
                               showSelectedItems: false,
                               items: provider.type,
@@ -190,6 +191,9 @@ class _AddPageState extends State<AddPage> {
                                   hintText: "Typeni tanlang",
                                   border: InputBorder.none),
                               selectedItem: provider.selectType,
+                              itemAsString: (TypeModel? value) {
+                                return value!.name.toString();
+                              },
                               onChanged: (value) {
                                 provider.selectType = value;
                               },

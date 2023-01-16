@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:agro_sanoat/allpages/animation_loading/loading.dart';
+import 'package:agro_sanoat/allpages/home_page/home_page_provider.dart';
+import 'package:agro_sanoat/allpages/job_type/job_type.dart';
 import 'package:agro_sanoat/allpages/statistic_page/statistic_page_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
+import 'package:agro_sanoat/route_generation/route_generation.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +44,17 @@ class _StorePageState extends State<StorePage> {
             elevation: 0,
             toolbarHeight: 40,
             centerTitle: true,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(RouteGeneration.jobType);
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/images/statistic.svg",
+                    height: 16,
+                    color: MainColors.fromHex(MainColors.colorWhite),
+                  ))
+            ],
             title: Text(
               "Statistika",
               style: TextStyle(
@@ -144,6 +159,10 @@ class _StorePageState extends State<StorePage> {
                                     PopupMenuItem(
                                       value: 2,
                                       child: Text(provider.farmar + ' soni'),
+                                    ),
+                                    PopupMenuItem(
+                                      value: 3,
+                                      child: Text("Faoliyat turi"),
                                     ),
                                   ]),
                         ],

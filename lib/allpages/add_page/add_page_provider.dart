@@ -2,6 +2,7 @@
 
 import 'package:agro_sanoat/http_service/http_constant.dart';
 import 'package:agro_sanoat/http_service/http_service.dart';
+import 'package:agro_sanoat/object/type_model.dart';
 import 'package:agro_sanoat/object/universal.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,8 @@ class AddPageProvider extends ChangeNotifier {
   final FocusNode infoFocus = FocusNode();
   List<UniversalModel> regions = [];
   List<UniversalModel> provins = [];
-  List<String> type = ["Xaridor", "Murojatchi"];
-  String? selectType;
+  List<TypeModel> type = [];
+  TypeModel? selectType;
   UniversalModel? selectRegion;
   UniversalModel? selectProvins;
   bool wrongname = false;
@@ -30,6 +31,10 @@ class AddPageProvider extends ChangeNotifier {
   bool loading = false;
 
   onStart() async {
+    var typeJson = await HttpService.GET(HttpConstant.type);
+    if (typeJson["status"] == HttpConnection.data) {
+      type = typeFromMap(typeJson["data"]);
+    }
     var regionJson = await HttpService.GET(HttpConstant.viloyat);
     if (regionJson["status"] == HttpConnection.data) {
       regions = regionFromMap(regionJson["data"]["rows"]);
@@ -49,7 +54,8 @@ class AddPageProvider extends ChangeNotifier {
         phone.length < 19 ||
         info.length < 20 ||
         selectProvins == null ||
-        selectRegion == null) {
+        selectRegion == null ||
+        selectType == null) {
       if (name.length < 4) {
         onErrorTextFieldName();
       } else {
@@ -83,6 +89,7 @@ class AddPageProvider extends ChangeNotifier {
     } else {
       String provinseId = selectProvins!.id.toString();
       String regionId = selectRegion!.id.toString();
+      String typeId = selectType!.id.toString();
       EasyLoading.instance
         ..displayDuration = const Duration(milliseconds: 1000)
         ..backgroundColor = Colors.white
@@ -95,6 +102,7 @@ class AddPageProvider extends ChangeNotifier {
         "fio": name,
         "regions_id": regionId,
         "areas_id": provinseId,
+        "appeals_types_id": typeId,
         "phone_number": phone,
         "text": info
       };

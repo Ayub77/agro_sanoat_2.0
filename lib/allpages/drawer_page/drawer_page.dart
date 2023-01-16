@@ -72,8 +72,8 @@ class _DrawerPageState extends State<DrawerPage> {
                         color: MainColors.fromHex(MainColors.colorGreen)),
                   ),
                   onTap: () {
-                    // Navigator.pop(context);
-                    // Navigator.of(context).pushNamed(RouteGeneration.info);
+                    Navigator.pop(context);
+                    Navigator.of(context).pushNamed(RouteGeneration.benefit);
                   },
                 ),
                 Container(

@@ -42,9 +42,6 @@ class LoginPageProvider extends ChangeNotifier {
           btnOkOnPress: () {
             Navigator.pop(context);
           },
-          btnCancelOnPress: (){
-            
-          }
         )..show();
       } else {
         EasyLoading.showInfo(response["data"]["message"]);

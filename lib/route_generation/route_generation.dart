@@ -1,13 +1,16 @@
 import 'package:agro_sanoat/allpages/add_page/add_page.dart';
+import 'package:agro_sanoat/allpages/benefit_page/benefit_page.dart';
 import 'package:agro_sanoat/allpages/home_page/heme_page.dart';
 import 'package:agro_sanoat/allpages/info_page/info_page.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/big_image_info.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/big_view_info.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/video_pler.dart';
+import 'package:agro_sanoat/allpages/job_type/job_type.dart';
 import 'package:agro_sanoat/allpages/login_page/login_page.dart';
 import 'package:agro_sanoat/allpages/my_info/my_infon.dart';
 import 'package:agro_sanoat/allpages/news_page/widgets/big_image.dart';
 import 'package:agro_sanoat/allpages/news_page/widgets/big_view_news.dart';
+import 'package:agro_sanoat/allpages/person_info/map_marker/map_marker.dart';
 import 'package:agro_sanoat/allpages/person_info/person_info.dart';
 import 'package:agro_sanoat/allpages/splash_page/splash_page.dart';
 import 'package:agro_sanoat/allpages/statistic_page/store_page.dart';
@@ -19,6 +22,8 @@ class RouteGeneration {
   static const statistic = "/store_page";
   static const info = "/info_page";
   static const login = "/login_page";
+  static const benefit = "/benefit_page";
+  static const map_marker = "/map_marker";
   static const personInfo = "/person_info";
   static const splashpage = "/splash_page";
   static const bigviewinfo = "/big_view_info";
@@ -26,6 +31,7 @@ class RouteGeneration {
   static const bigImageNews = "/big_image";
   static const myInfo = "/my_info";
   static const video = "/video_pler";
+  static const jobType = "/job_type";
   static const bigImageInfo = "/big_image_info";
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -40,9 +46,15 @@ class RouteGeneration {
       case statistic:
         return MaterialPageRoute(
             builder: (BuildContext context) => const StorePage());
+      case map_marker:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => MapMarker(latlng: args));
       case personInfo:
         return MaterialPageRoute(
             builder: (BuildContext context) => const PersonInfo());
+      case benefit:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const BenifitPage());
       case info:
         return MaterialPageRoute(
             builder: (BuildContext context) => const InfoPage());
@@ -61,6 +73,9 @@ class RouteGeneration {
       case login:
         return MaterialPageRoute(
             builder: (BuildContext context) => const LoginPage());
+      case jobType:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const JobType());
       case video:
         return MaterialPageRoute(
             builder: (BuildContext context) => VideoPlyer(videoUrl: args));
