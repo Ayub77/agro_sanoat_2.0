@@ -30,8 +30,8 @@ class _DrawerPageState extends State<DrawerPage> {
       create: (context) => provider,
       child: Consumer<DrawerPageProvider>(
         builder: (context, value, child) => Scaffold(
+          backgroundColor: MainColors.fromHex(MainColors.colorWhite),
           body: Container(
-            color: MainColors.fromHex(MainColors.colorWhite),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,7 +84,8 @@ class _DrawerPageState extends State<DrawerPage> {
                         ),
                         onTap: () {
                           Navigator.pop(context);
-                          Navigator.of(context).pushNamed(RouteGeneration.info);
+                          Navigator.of(context)
+                              .pushNamed(RouteGeneration.income);
                         },
                       ),
                     ],

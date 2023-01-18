@@ -202,53 +202,50 @@ class _StatisticState extends State<Statistic> {
               ),
             ),
             SizedBox(height: 10),
-            Visibility(
-              visible: visible,
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed(RouteGeneration.benefit);
-                },
-                child: Container(
-                  height: 70,
-                  decoration: BoxDecoration(
-                      color: MainColors.fromHex(MainColors.colorWhite),
-                      borderRadius: BorderRadius.circular(17),
-                      border: Border.all(
-                          color: MainColors.fromHex(MainColors.colorGreen),
-                          width: 1.5)),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 69,
-                        width: 85,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: MainColors.fromHex(MainColors.colorGreen)
-                                .withOpacity(0.5),
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomLeft: Radius.circular(15))),
-                        child: SvgPicture.asset(
-                          "assets/images/money.svg",
-                          height: 30,
-                          color: MainColors.fromHex(MainColors.colorWhite),
-                        ),
-                      ),
-                      Container(
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(RouteGeneration.benefit);
+              },
+              child: Container(
+                height: 70,
+                decoration: BoxDecoration(
+                    color: MainColors.fromHex(MainColors.colorWhite),
+                    borderRadius: BorderRadius.circular(17),
+                    border: Border.all(
                         color: MainColors.fromHex(MainColors.colorGreen),
-                        height: 69,
-                        width: 1.5,
+                        width: 1.5)),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 69,
+                      width: 85,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: MainColors.fromHex(MainColors.colorGreen)
+                              .withOpacity(0.5),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              bottomLeft: Radius.circular(15))),
+                      child: SvgPicture.asset(
+                        "assets/images/money.svg",
+                        height: 30,
+                        color: MainColors.fromHex(MainColors.colorWhite),
                       ),
-                      Expanded(
-                          child: Text(
-                        "      Daromadlar tarixi",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: MainColors.fromHex(MainColors.colorBlack)),
-                      ))
-                    ],
-                  ),
+                    ),
+                    Container(
+                      color: MainColors.fromHex(MainColors.colorGreen),
+                      height: 69,
+                      width: 1.5,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "      Daromadlar",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: MainColors.fromHex(MainColors.colorBlack)),
+                    ))
+                  ],
                 ),
               ),
             ),

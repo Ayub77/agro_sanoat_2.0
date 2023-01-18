@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'widget/animation_container.dart';
+import 'widget/scrol_service_vidget.dart';
 import 'widget/scroll_info_widget.dart';
 import 'widget/scroll_new_widget.dart';
 
@@ -373,8 +374,157 @@ class _HeaderPageState extends State<HeaderPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 30,
-                      )
+                        height: 40,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        decoration: BoxDecoration(
+                            color: MainColors.fromHex("#FFFFFF"),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "   Xizmatlar",
+                              style: TextStyle(
+                                  color:
+                                      MainColors.fromHex(MainColors.colorBlack),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(height: 10),
+                            provider.itemService.length < 5
+                                ? Column(
+                                    children: [
+                                      Container(
+                                          width: size.width,
+                                          height: 380,
+                                          child: PageView(
+                                            controller:
+                                                provider.serviceController,
+                                            children: [
+                                              for (int i = 0;
+                                                  i <
+                                                      provider
+                                                          .itemService.length;
+                                                  i++)
+                                                ScrollNewsWidget(
+                                                  size: size,
+                                                  item: provider.itemService[i],
+                                                  ontap: () {
+                                                    provider.ontapService(
+                                                        context,
+                                                        provider
+                                                            .itemService[i]);
+                                                  },
+                                                ),
+                                            ],
+                                            onPageChanged: (index) {
+                                              provider.changeService(index);
+                                            },
+                                          )),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          for (int i = 0;
+                                              i < provider.itemService.length;
+                                              i++)
+                                            AnimationContainerWidget(
+                                                check: provider
+                                                        .animateindexService ==
+                                                    i),
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                : Column(
+                                    children: [
+                                      Container(
+                                          width: size.width,
+                                          height: 380,
+                                          child: PageView(
+                                            controller:
+                                                provider.serviceController,
+                                            children: [
+                                              ScrollServiceWidget(
+                                                size: size,
+                                                item: provider.itemService[0],
+                                                ontap: () {
+                                                  provider.ontapService(context,
+                                                      provider.itemService[0]);
+                                                },
+                                              ),
+                                              ScrollServiceWidget(
+                                                size: size,
+                                                item: provider.itemService[1],
+                                                ontap: () {
+                                                  provider.ontapService(context,
+                                                      provider.itemService[1]);
+                                                },
+                                              ),
+                                              ScrollServiceWidget(
+                                                size: size,
+                                                item: provider.itemService[2],
+                                                ontap: () {
+                                                  provider.ontapService(context,
+                                                      provider.itemService[2]);
+                                                },
+                                              ),
+                                              ScrollServiceWidget(
+                                                size: size,
+                                                item: provider.itemService[3],
+                                                ontap: () {
+                                                  provider.ontapService(context,
+                                                      provider.itemService[3]);
+                                                },
+                                              ),
+                                              ScrollServiceWidget(
+                                                size: size,
+                                                item: provider.itemService[4],
+                                                ontap: () {
+                                                  provider.ontapService(context,
+                                                      provider.itemService[4]);
+                                                },
+                                              ),
+                                            ],
+                                            onPageChanged: (index) {
+                                              provider.changeService(index);
+                                            },
+                                          )),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          AnimationContainerWidget(
+                                              check: provider
+                                                      .animateindexService ==
+                                                  0),
+                                          AnimationContainerWidget(
+                                              check: provider
+                                                      .animateindexService ==
+                                                  1),
+                                          AnimationContainerWidget(
+                                              check: provider
+                                                      .animateindexService ==
+                                                  2),
+                                          AnimationContainerWidget(
+                                              check: provider
+                                                      .animateindexService ==
+                                                  3),
+                                          AnimationContainerWidget(
+                                              check: provider
+                                                      .animateindexService ==
+                                                  4),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                            SizedBox(height: 10),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 30),
                     ],
                   ),
                 ),

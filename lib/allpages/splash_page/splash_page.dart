@@ -77,7 +77,7 @@ class _SplashPageState extends State<SplashPage> {
                                 'Yosh fermer',
                                 duration: const Duration(milliseconds: 1700),
                                 textStyle: const TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),

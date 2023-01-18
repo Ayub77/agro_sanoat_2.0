@@ -4,7 +4,11 @@ class HttpConstant {
   static String murojat = "${additional}appeals";
   static String login = "${additional}auth/client-mobile/login";
   static String editPerson = "${additional}farmers/client-mobile/edit";
+  static String myIncome =
+      "${additional}farmers-income-history/client-mobile/get";
   static String viloyat = "${additional}regions/mobile";
+  static String addIncome =
+      "${additional}farmers-income-history/client-mobile/create";
   static String job = "${additional}type-of-activities/client-mobile/get";
   static String typesOfJob = "${additional}map/client-mobile/type-of-activity";
   static String needs =
@@ -20,4 +24,6 @@ class HttpConstant {
   static String foydalanish = "${additional}news/get-short-guide";
   static String videoInfo = "${additional}news/get-guid-videos";
   static String dashboard = "${additional}farmers/all-farmers-mobile";
+  static String statisticRegion =
+      "${additional}farmers-income-history/client-mobile/statistics";
 }

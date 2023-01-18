@@ -3,6 +3,7 @@ import 'package:agro_sanoat/allpages/login_page/widget/login_widget2.dart';
 import 'package:agro_sanoat/allpages/login_page/widget/loginwidget1.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPageView extends StatelessWidget {
   const LoginPageView({
@@ -11,12 +12,16 @@ class LoginPageView extends StatelessWidget {
     required this.nameController,
     required this.passwordController,
     required this.ontap,
+    required this.eyeOntap,
+    required this.eyeView,
   }) : super(key: key);
 
   final Size size;
   final TextEditingController nameController;
   final TextEditingController passwordController;
   final Function ontap;
+  final Function eyeOntap;
+  final bool eyeView;
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +44,35 @@ class LoginPageView extends StatelessWidget {
             LoginWidget1(
               controller: nameController,
               size: size,
-              icon: Icon(Icons.mail,
+              icon: Icon(Icons.person,
                   color: MainColors.fromHex(MainColors.colorGreen)),
-              name: 'Username',
+              name: 'Login',
             ),
-            LoginWidget1(
-              controller: passwordController,
-              size: size,
-              icon: Icon(Icons.lock,
-                  color: MainColors.fromHex(MainColors.colorGreen)),
-              name: 'Password',
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              width: size.width * 0.9,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color:
+                      MainColors.fromHex(MainColors.colorGreen).withAlpha(50)),
+              child: TextField(
+                controller: passwordController,
+                cursorColor: MainColors.fromHex(MainColors.colorGreen),
+                obscureText: eyeView,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          eyeOntap();
+                        },
+                        icon: eyeView
+                            ? SvgPicture.asset("assets/images/closeEye.svg")
+                            : SvgPicture.asset("assets/images/openEye.svg")),
+                    icon: Icon(Icons.lock,
+                        color: MainColors.fromHex(MainColors.colorGreen)),
+                    hintText: 'Parol',
+                    border: InputBorder.none),
+              ),
             ),
             SizedBox(height: 70),
             LoginWidget2(

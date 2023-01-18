@@ -14,10 +14,13 @@ class HeaderPageProvider extends ChangeNotifier {
   late BuildContext thiscontext;
   PageController infoController = PageController();
   PageController newsController = PageController();
+  PageController serviceController = PageController();
   int animateindexInfo = 0;
   int animateindexNews = 0;
+  int animateindexService = 0;
   List itemNews = [];
   List itemInfo = [];
+  List itemService = [];
   onStart(context) async {
     loading = true;
     notifyListeners();
@@ -30,6 +33,10 @@ class HeaderPageProvider extends ChangeNotifier {
     var newsJson = await box.get("new");
     if (newsJson != null) {
       itemNews = jsonDecode(newsJson) as List;
+    }
+    var serviceJson = await box.get("service");
+    if (serviceJson != null) {
+      itemService = jsonDecode(serviceJson) as List;
     }
 
     loading = false;
@@ -53,6 +60,11 @@ class HeaderPageProvider extends ChangeNotifier {
 
   changeNews(index) {
     animateindexNews = index;
+    notifyListeners();
+  }
+
+  changeService(index) {
+    animateindexService = index;
     notifyListeners();
   }
 
@@ -88,5 +100,10 @@ class HeaderPageProvider extends ChangeNotifier {
     EasyLoading.dismiss();
     Navigator.of(context)
         .pushNamed(RouteGeneration.bigviewnews, arguments: response["data"][0]);
+  }
+
+  ontapService(context, info) {
+    Navigator.of(context)
+        .pushNamed(RouteGeneration.bigviewinfo, arguments: info);
   }
 }

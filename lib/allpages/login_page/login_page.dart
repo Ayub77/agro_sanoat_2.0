@@ -63,13 +63,16 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(100)),
                         )),
                     LoginPageView(
-                      size: size,
-                      nameController: provider.nameController,
-                      passwordController: provider.passwordController,
-                      ontap: () {
-                        provider.ontapChek(context);
-                      },
-                    ),
+                        size: size,
+                        nameController: provider.nameController,
+                        passwordController: provider.passwordController,
+                        ontap: () {
+                          provider.ontapChek(context);
+                        },
+                        eyeOntap: () {
+                          provider.chooseEye();
+                        },
+                        eyeView: provider.eyeView),
                   ],
                 ),
         ),

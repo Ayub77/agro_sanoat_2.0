@@ -1,6 +1,8 @@
 import 'package:agro_sanoat/allpages/add_page/add_page.dart';
 import 'package:agro_sanoat/allpages/benefit_page/benefit_page.dart';
 import 'package:agro_sanoat/allpages/home_page/heme_page.dart';
+import 'package:agro_sanoat/allpages/income_page/add_income/add_income.dart';
+import 'package:agro_sanoat/allpages/income_page/income_page.dart';
 import 'package:agro_sanoat/allpages/info_page/info_page.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/big_image_info.dart';
 import 'package:agro_sanoat/allpages/info_page/widgets/big_view_info.dart';
@@ -22,9 +24,11 @@ class RouteGeneration {
   static const addpage = "/add_page";
   static const store = "/store_page";
   static const statistic = "/statistic_page";
+  static const income = "/income_page";
   static const info = "/info_page";
   static const login = "/login_page";
   static const benefit = "/benefit_page";
+  static const addIncome = "/add_income";
   static const map_marker = "/map_marker";
   static const personInfo = "/person_info";
   static const splashpage = "/splash_page";
@@ -48,6 +52,12 @@ class RouteGeneration {
       case statistic:
         return MaterialPageRoute(
             builder: (BuildContext context) => const Statistic());
+      case income:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const IncomePage());
+      case addIncome:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const AddIncome());
       case store:
         return MaterialPageRoute(
             builder: (BuildContext context) => StorePage(id: args));

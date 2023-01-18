@@ -22,6 +22,7 @@ class SplashPageProvider extends ChangeNotifier {
     box.put("video", null);
     box.put("st1", null);
     box.put("st2", null);
+    box.put("service", null);
     //box.put("person", null);
     Timer(const Duration(milliseconds: 400), () {
       a = true;
@@ -49,6 +50,11 @@ class SplashPageProvider extends ChangeNotifier {
       if (response["status"] == HttpConnection.data) {
         Box box = await Hive.openBox("db");
         box.put("info", json.encode(response["data"]));
+      }
+      var res = await HttpService.GET(HttpConstant.xizmatlar);
+      if (res["status"] == HttpConnection.data) {
+        Box box = await Hive.openBox("db");
+        box.put("service", json.encode(response["data"]));
       }
       d = true;
       notifyListeners();

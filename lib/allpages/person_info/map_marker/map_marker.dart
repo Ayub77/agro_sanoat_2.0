@@ -62,9 +62,10 @@ class _MapMarkerState extends State<MapMarker> {
               : Stack(
                   children: [
                     GoogleMap(
+                        mapType: MapType.satellite,
                         markers: provider.markers,
                         initialCameraPosition: CameraPosition(
-                            target: provider.sourselocation, zoom: 10)),
+                            target: provider.sourselocation, zoom: 18)),
                     Positioned(
                         bottom: 30,
                         left: 30,

@@ -85,7 +85,7 @@ class BigviewInfo extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      item["short_text"],
+                      item["short_text"].toString(),
                       style: TextStyle(fontSize: 16, height: 1.4),
                     ),
 

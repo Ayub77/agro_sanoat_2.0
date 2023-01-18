@@ -11,6 +11,7 @@ class LoginPageProvider extends ChangeNotifier {
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
   bool loading = false;
+  bool eyeView = false;
 
   ontapChek(context) async {
     loading = true;
@@ -25,6 +26,7 @@ class LoginPageProvider extends ChangeNotifier {
       if (response["status"] == HttpConnection.data) {
         Box box = await Hive.openBox("db");
         box.put("person", {"login": name, "password": password});
+        box.put("personInfo", response["data"]);
         //Navigator.pop(context);
         AwesomeDialog(
           context: context,
@@ -48,6 +50,11 @@ class LoginPageProvider extends ChangeNotifier {
       }
     }
     loading = false;
+    notifyListeners();
+  }
+
+  chooseEye() {
+    eyeView = !eyeView;
     notifyListeners();
   }
 }
