@@ -14,6 +14,7 @@ import 'package:agro_sanoat/allpages/news_page/widgets/big_image.dart';
 import 'package:agro_sanoat/allpages/news_page/widgets/big_view_news.dart';
 import 'package:agro_sanoat/allpages/person_info/map_marker/map_marker.dart';
 import 'package:agro_sanoat/allpages/person_info/person_info.dart';
+import 'package:agro_sanoat/allpages/person_info/setInfo/set_info.dart';
 import 'package:agro_sanoat/allpages/splash_page/splash_page.dart';
 import 'package:agro_sanoat/allpages/statistic_page/statistic_page.dart';
 import 'package:agro_sanoat/allpages/statistic_page/store_page.dart';
@@ -26,6 +27,7 @@ class RouteGeneration {
   static const statistic = "/statistic_page";
   static const income = "/income_page";
   static const info = "/info_page";
+  static const setInfo = "/set_info";
   static const login = "/login_page";
   static const benefit = "/benefit_page";
   static const addIncome = "/add_income";
@@ -55,9 +57,13 @@ class RouteGeneration {
       case income:
         return MaterialPageRoute(
             builder: (BuildContext context) => const IncomePage());
+      case setInfo:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const SetInfo());
       case addIncome:
         return MaterialPageRoute(
-            builder: (BuildContext context) => const AddIncome());
+            builder: (BuildContext context) =>
+                AddIncome(type: args.toString()));
       case store:
         return MaterialPageRoute(
             builder: (BuildContext context) => StorePage(id: args));

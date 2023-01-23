@@ -69,7 +69,7 @@ class _BenifitPageState extends State<BenifitPage> {
                           : Column(
                               children: [
                                 SizedBox(
-                                  height: 20,
+                                  height: 5,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -77,8 +77,8 @@ class _BenifitPageState extends State<BenifitPage> {
                                     Text(
                                       provider.change,
                                       style: GoogleFonts.poppins(
-                                          fontSize: 27,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600,
                                           color: MainColors.fromHex(
                                               MainColors.colorBlack)),
                                     ),
@@ -104,14 +104,37 @@ class _BenifitPageState extends State<BenifitPage> {
                                             ]),
                                   ],
                                 ),
-                                SizedBox(height: 30),
+                                Container(
+                                  height: 50,
+                                  width: double.infinity,
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(provider.year,
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                              color: MainColors.fromHex(
+                                                  MainColors.colorBlack))),
+                                      Text(
+                                          provider.setMonthName(provider.month),
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                              color: MainColors.fromHex(
+                                                  MainColors.colorBlack))),
+                                    ],
+                                  ),
+                                ),
                                 PieChart(
                                   dataMap: provider.dataMap,
                                   colorList: provider.colors,
                                   animationDuration:
                                       Duration(milliseconds: 800),
                                   chartLegendSpacing: 20,
-                                  chartRadius: 150,
+                                  chartRadius: 180,
                                   chartType: ChartType.ring,
                                   ringStrokeWidth: 30,
                                   centerTextStyle: TextStyle(
@@ -142,12 +165,14 @@ class _BenifitPageState extends State<BenifitPage> {
                                         itemBuilder: (context, index) {
                                           return InfoWidget(
                                             text: provider.index == 0
-                                                ? "so'm"
+                                                ? "mln"
                                                 : "kg",
                                             color: provider.colors[index],
                                             name: provider.items[index]["name"],
                                             number: provider.index == 0
-                                                ? provider.items[index]["sum"]
+                                                ? (provider.items[index]
+                                                            ["sum"] /
+                                                        1000000)
                                                     .toString()
                                                 : provider.items[index]
                                                         ["amount"]

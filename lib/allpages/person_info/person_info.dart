@@ -63,6 +63,10 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                             value: 1,
                             child: Text("Tahrirlash"),
                           ),
+                          const PopupMenuItem(
+                            value: 3,
+                            child: Text("Parolni o'zgartirish"),
+                          ),
                           PopupMenuItem(
                             value: 2,
                             child: Text("Chiqish"),

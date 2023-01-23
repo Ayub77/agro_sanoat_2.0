@@ -5,10 +5,16 @@ class TreeNumber {
     }
     bool real = false;
     String valueRealPart = '';
+    String nol = "";
     if (value.indexOf('.') > 0) {
       real = true;
       valueRealPart = value.substring(value.indexOf('.'), value.length);
       value = value.substring(0, value.indexOf('.'));
+      if (valueRealPart.length > 4) {
+        nol = valueRealPart.substring(0, 3);
+      } else {
+        nol = valueRealPart;
+      }
     }
     String count = '';
     if (value.length > 3) {
@@ -24,6 +30,6 @@ class TreeNumber {
     } else {
       count = value;
     }
-    return count;
+    return count + nol;
   }
 }

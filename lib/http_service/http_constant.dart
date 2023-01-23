@@ -3,6 +3,8 @@ class HttpConstant {
   static String additional = "/api/";
   static String murojat = "${additional}appeals";
   static String login = "${additional}auth/client-mobile/login";
+  static String editLogin =
+      "${additional}farmers/client-mobile/update-password";
   static String editPerson = "${additional}farmers/client-mobile/edit";
   static String myIncome =
       "${additional}farmers-income-history/client-mobile/get";

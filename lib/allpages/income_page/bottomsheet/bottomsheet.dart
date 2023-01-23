@@ -1,10 +1,10 @@
 // ignore_for_file: unnecessary_new, prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:agro_sanoat/allpages/benefit_page/bottomsheet/bottomsheet_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+
+import 'bottomsheet_provider.dart';
 
 class BottomSheetWidget {
   static modalBottomSheetMenu(context) {
@@ -54,7 +54,7 @@ class BottomSheetWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "  Tug'ilgan sana",
+                                    "  ",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,

@@ -1,4 +1,3 @@
-import 'package:agro_sanoat/allpages/benefit_page/bottomsheet/bottomsheet.dart';
 import 'package:agro_sanoat/http_service/http_constant.dart';
 import 'package:agro_sanoat/http_service/http_service.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +12,16 @@ class BenifitPageProvider extends ChangeNotifier {
   String birthDay = "";
   DateTime selectedDate = DateTime.now();
   Map<String, String> param = {};
+  String year = "";
+  int month = 0;
   onStart(context) async {
-    if (param.isEmpty) {
-      await Future.delayed(const Duration(milliseconds: 500));
-      selectDate(context);
-    } else {
-      getInfo();
-    }
+    param = {
+      "year": DateTime.now().year.toString(),
+      "month": DateTime.now().month.toString()
+    };
+    year = DateTime.now().year.toString();
+    month = DateTime.now().month;
+    getInfo();
   }
 
   getInfo() async {
@@ -52,20 +54,6 @@ class BenifitPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  openBottom(context) {
-    BottomSheetWidget.modalBottomSheetMenu(context);
-  }
-
-  setBirthday(DateTime picked) {
-    String month = picked.month < 10
-        ? "0" + picked.month.toString()
-        : picked.month.toString();
-    String year = selectedDate.year.toString();
-
-    param = {"year": year, "month": month};
-    getInfo();
-  }
-
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showMonthPicker(
         context: context,
@@ -73,8 +61,44 @@ class BenifitPageProvider extends ChangeNotifier {
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
-      setBirthday(picked);
+      param = {
+        "year": picked.year.toString(),
+        "month": picked.month.toString()
+      };
+      year = picked.year.toString();
+      month = picked.month;
+      getInfo();
     }
+  }
+
+  String setMonthName(int index) {
+    switch (index) {
+      case 1:
+        return "Yanvar";
+      case 2:
+        return "Fevral";
+      case 3:
+        return "Mart";
+      case 4:
+        return "Aprel";
+      case 5:
+        return "May";
+      case 6:
+        return "Iyun";
+      case 7:
+        return "Iyul";
+      case 8:
+        return "Avgust";
+      case 9:
+        return "Sentyabr";
+      case 10:
+        return "Oktyabr";
+      case 11:
+        return "Noyabr";
+      case 12:
+        return "Dekabr";
+    }
+    return "";
   }
 
   List<Color> colors = [

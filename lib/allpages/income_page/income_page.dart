@@ -45,6 +45,13 @@ class _IncomePageState extends State<IncomePage> {
                   fontWeight: FontWeight.w600,
                   color: MainColors.fromHex(MainColors.colorWhite)),
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    provider.selectDate(context);
+                  },
+                  icon: SvgPicture.asset("assets/images/filter.svg"))
+            ],
           ),
           body: provider.loading
               ? Loading()
@@ -77,7 +84,16 @@ class _IncomePageState extends State<IncomePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    SizedBox(),
+                                    Text(
+                                      provider.items[index]
+                                              ["type_of_activites_name"]
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          color: MainColors.fromHex(
+                                              MainColors.colorBlack)),
+                                    ),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
@@ -112,7 +128,7 @@ class _IncomePageState extends State<IncomePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "miqdori:",
+                                          "Miqdori:",
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -138,7 +154,7 @@ class _IncomePageState extends State<IncomePage> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "qiymati:",
+                                          "Qiymati:",
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -147,10 +163,11 @@ class _IncomePageState extends State<IncomePage> {
                                         ),
                                         SizedBox(height: 1),
                                         Text(
-                                          TreeNumber.toProcessCost(provider
-                                                  .items[index]["sum"]
+                                          TreeNumber.toProcessCost((provider
+                                                          .items[index]["sum"] /
+                                                      1000000)
                                                   .toString()) +
-                                              " so'm",
+                                              " mln",
                                           style: TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w700,
@@ -178,7 +195,7 @@ class _IncomePageState extends State<IncomePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "kiritilgan sana:",
+                                          "Kiritilgan sana:",
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -207,7 +224,7 @@ class _IncomePageState extends State<IncomePage> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "olingan sana:",
+                                          "Olingan sana:",
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -234,7 +251,8 @@ class _IncomePageState extends State<IncomePage> {
                       })),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(RouteGeneration.addIncome);
+              Navigator.of(context).pushNamed(RouteGeneration.addIncome,
+                  arguments: provider.type);
             },
             child: Icon(Icons.add),
             backgroundColor: MainColors.fromHex(MainColors.colorGreen),

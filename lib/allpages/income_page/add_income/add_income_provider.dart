@@ -2,7 +2,6 @@
 
 import 'package:agro_sanoat/http_service/http_constant.dart';
 import 'package:agro_sanoat/http_service/http_service.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -52,6 +51,7 @@ class AddIncomeProvider extends ChangeNotifier {
         "farmers_id": person["id"],
         "amount": amount,
         "sum": sum,
+        "type_of_activities_id": person["type_activities_id"],
         "pay_date": birthDay
       };
       var response = await HttpService.POST(HttpConstant.addIncome, param);

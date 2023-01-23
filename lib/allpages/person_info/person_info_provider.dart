@@ -182,7 +182,8 @@ class PersonInfoProvider extends ChangeNotifier {
   selectItem(index, context) {
     if (index == 1) {
       textvisible();
-    } else {
+    }
+    if (index == 2) {
       AwesomeDialog(
           context: context,
           animType: AnimType.scale,
@@ -204,6 +205,9 @@ class PersonInfoProvider extends ChangeNotifier {
           },
           btnCancelOnPress: () {})
         ..show();
+    }
+    if (index == 3) {
+      Navigator.of(context).pushNamed(RouteGeneration.setInfo);
     }
   }
 }
