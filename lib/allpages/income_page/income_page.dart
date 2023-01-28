@@ -62,11 +62,11 @@ class _IncomePageState extends State<IncomePage> {
                       itemCount: provider.items.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          height: 180,
+                          height: 185,
                           width: double.infinity,
                           margin:
                               EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.only(top: 12),
                           decoration: BoxDecoration(
                               color: MainColors.fromHex(MainColors.colorWhite),
                               border: Border.all(
@@ -84,15 +84,31 @@ class _IncomePageState extends State<IncomePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      provider.items[index]
-                                              ["type_of_activites_name"]
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          color: MainColors.fromHex(
-                                              MainColors.colorBlack)),
+                                    Container(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Mahsulot nomi:",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: MainColors.fromHex(
+                                                    "#8896A1")),
+                                          ),
+                                          Text(
+                                            provider.items[index]
+                                                    ["product_types_name"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600,
+                                                color: MainColors.fromHex(
+                                                    MainColors.colorBlack)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     Column(
                                       crossAxisAlignment:
@@ -115,7 +131,7 @@ class _IncomePageState extends State<IncomePage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 5),
+                              SizedBox(height: 20),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
@@ -179,7 +195,7 @@ class _IncomePageState extends State<IncomePage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: 10),
                               DottedLine(
                                   dashColor: Colors.grey.withOpacity(0.6)),
                               SizedBox(height: 10),
@@ -195,7 +211,7 @@ class _IncomePageState extends State<IncomePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Kiritilgan sana:",
+                                          "Yaratilgan sana:",
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -224,7 +240,7 @@ class _IncomePageState extends State<IncomePage> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "Olingan sana:",
+                                          "Daromad sana:",
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
@@ -251,8 +267,12 @@ class _IncomePageState extends State<IncomePage> {
                       })),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(RouteGeneration.addIncome,
-                  arguments: provider.type);
+              Navigator.of(context)
+                  .pushNamed(RouteGeneration.addIncome,
+                      arguments: provider.type)
+                  .then((value) {
+                provider.onStart();
+              });
             },
             child: Icon(Icons.add),
             backgroundColor: MainColors.fromHex(MainColors.colorGreen),

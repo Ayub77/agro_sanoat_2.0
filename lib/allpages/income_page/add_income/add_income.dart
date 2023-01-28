@@ -3,6 +3,8 @@
 import 'package:agro_sanoat/allpages/animation_loading/loading.dart';
 import 'package:agro_sanoat/allpages/income_page/add_income/add_income_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
+import 'package:agro_sanoat/object/type_model.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,13 @@ class AddIncome extends StatefulWidget {
 
 class _AddIncomeState extends State<AddIncome> {
   AddIncomeProvider provider = AddIncomeProvider();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    provider.onStart();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +59,7 @@ class _AddIncomeState extends State<AddIncome> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "  Faoliyat turi",
+                            "  Maxsulot nomi",
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
@@ -58,9 +67,8 @@ class _AddIncomeState extends State<AddIncome> {
                           ),
                           SizedBox(height: 3),
                           Container(
-                              height: 50,
+                              height: 45,
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(horizontal: 15),
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: MainColors.fromHex(
@@ -68,12 +76,30 @@ class _AddIncomeState extends State<AddIncome> {
                                       width: 1.5),
                                   borderRadius: BorderRadius.circular(10)),
                               alignment: Alignment.centerLeft,
-                              child: Text(
-                                widget.type,
-                                style: TextStyle(
+                              child: DropdownSearch<TypeModel>(
+                                mode: Mode.MENU,
+                                dropdownSearchBaseStyle: TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black),
+                                showSelectedItems: false,
+                                items: provider.items,
+                                dropdownSearchDecoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 9, horizontal: 17),
+                                    hintText: "Maxsulot nomini tanlang",
+                                    hintStyle: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey),
+                                    border: InputBorder.none),
+                                selectedItem: provider.select,
+                                itemAsString: (TypeModel? value) {
+                                  return value!.name.toString();
+                                },
+                                onChanged: (value) {
+                                  provider.select = value;
+                                },
                               )),
                           SizedBox(height: 20),
                           Text(
@@ -87,7 +113,7 @@ class _AddIncomeState extends State<AddIncome> {
                           Container(
                               //height: 45,
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              padding: EdgeInsets.only(left: 15),
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: MainColors.fromHex(
@@ -104,7 +130,19 @@ class _AddIncomeState extends State<AddIncome> {
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black),
                                 decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(0),
+                                    suffixIcon: Container(
+                                      alignment: Alignment.center,
+                                      width: 50,
+                                      child: Text(
+                                        "So'm",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    contentPadding: EdgeInsets.only(top: 13),
                                     border: InputBorder.none),
                               )),
                           SizedBox(height: 20),
@@ -119,7 +157,7 @@ class _AddIncomeState extends State<AddIncome> {
                           Container(
                               //height: 45,
                               width: double.infinity,
-                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              padding: EdgeInsets.only(left: 15),
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: MainColors.fromHex(
@@ -136,7 +174,19 @@ class _AddIncomeState extends State<AddIncome> {
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black),
                                 decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(0),
+                                    suffixIcon: Container(
+                                      alignment: Alignment.center,
+                                      width: 50,
+                                      child: Text(
+                                        "Kg",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    contentPadding: EdgeInsets.only(top: 13),
                                     border: InputBorder.none),
                               )),
                           SizedBox(height: 20),
