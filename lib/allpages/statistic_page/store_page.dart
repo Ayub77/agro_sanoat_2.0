@@ -163,10 +163,19 @@ class _StorePageState extends State<StorePage> {
                                   text: provider.change ==
                                           (provider.farmar + " soni")
                                       ? "ta"
-                                      : "sotix",
+                                      : provider.itemNumber[index] > 100
+                                          ? "gektar"
+                                          : "sotix",
                                   color: provider.colors[index],
                                   name: provider.itemName[index],
-                                  number: provider.itemNumber[index].toString(),
+                                  number: provider.change ==
+                                          (provider.farmar + " soni")
+                                      ? provider.itemNumber[index].toString()
+                                      : provider.itemNumber[index] > 100
+                                          ? (provider.itemNumber[index] / 1000)
+                                              .toString()
+                                          : provider.itemNumber[index]
+                                              .toString(),
                                 );
                               }))
                     ],

@@ -166,7 +166,11 @@ class _BenifitPageState extends State<BenifitPage> {
                                           return InfoWidget(
                                             text: provider.index == 0
                                                 ? "mln"
-                                                : "kg",
+                                                : provider.items[index]
+                                                            ["amount"] >
+                                                        1000
+                                                    ? " tonna"
+                                                    : " kg",
                                             color: provider.colors[index],
                                             name: provider.items[index]["name"],
                                             number: provider.index == 0
@@ -175,8 +179,15 @@ class _BenifitPageState extends State<BenifitPage> {
                                                         1000000)
                                                     .toString()
                                                 : provider.items[index]
-                                                        ["amount"]
-                                                    .toString(),
+                                                            ["amount"] >
+                                                        1000
+                                                    ? (provider.items[index]
+                                                                ["amount"] /
+                                                            1000)
+                                                        .toString()
+                                                    : provider.items[index]
+                                                            ["amount"]
+                                                        .toString(),
                                           );
                                         }))
                               ],

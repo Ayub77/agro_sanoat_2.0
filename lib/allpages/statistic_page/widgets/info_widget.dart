@@ -53,7 +53,9 @@ class InfoWidget extends StatelessWidget {
             ],
           ),
           Text(
-            TreeNumber.toProcessCost(number.toString()) + " " + text,
+            text == "ta"
+                ? TreeNumber.toProcessCost(number.toString()) + " " + text
+                : TreeNumber.toProcessCostNol(number.toString()) + " " + text,
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
           )
         ],

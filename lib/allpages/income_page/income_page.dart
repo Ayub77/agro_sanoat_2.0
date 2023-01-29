@@ -55,216 +55,246 @@ class _IncomePageState extends State<IncomePage> {
           ),
           body: provider.loading
               ? Loading()
-              : Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: ListView.builder(
-                      itemCount: provider.items.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 185,
-                          width: double.infinity,
-                          margin:
-                              EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                          padding: EdgeInsets.only(top: 12),
-                          decoration: BoxDecoration(
-                              color: MainColors.fromHex(MainColors.colorWhite),
-                              border: Border.all(
+              : provider.items.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Ma'lumorlar mavjud emas",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: MainColors.fromHex(MainColors.colorBlack)),
+                      ),
+                    )
+                  : Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: ListView.builder(
+                          itemCount: provider.items.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: 185,
+                              width: double.infinity,
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              padding: EdgeInsets.only(top: 12),
+                              decoration: BoxDecoration(
                                   color:
-                                      MainColors.fromHex(MainColors.colorGreen)
+                                      MainColors.fromHex(MainColors.colorWhite),
+                                  border: Border.all(
+                                      color: MainColors.fromHex(
+                                              MainColors.colorGreen)
                                           .withOpacity(0.5),
-                                  width: 1.5),
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Mahsulot nomi:",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: MainColors.fromHex(
-                                                    "#8896A1")),
-                                          ),
-                                          Text(
-                                            provider.items[index]
-                                                    ["product_types_name"]
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w600,
-                                                color: MainColors.fromHex(
-                                                    MainColors.colorBlack)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
+                                        Container(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Mahsulot nomi:",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: MainColors.fromHex(
+                                                        "#8896A1")),
+                                              ),
+                                              Text(
+                                                provider.items[index]
+                                                        ["product_types_name"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: MainColors.fromHex(
+                                                        MainColors.colorBlack)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            SvgPicture.asset(
+                                              "assets/images/nomer.svg",
+                                              height: 14,
+                                            ),
+                                            Text(
+                                                provider.items[index]["id"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: MainColors.fromHex(
+                                                        MainColors.colorBlack)))
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Miqdori:",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: MainColors.fromHex(
+                                                      "#8896A1")),
+                                            ),
+                                            SizedBox(height: 1),
+                                            Text(
+                                              provider.items[index]["amount"] >
+                                                      1000
+                                                  ? TreeNumber.toProcessCostNol(
+                                                          (provider.items[index]
+                                                                      [
+                                                                      "amount"] /
+                                                                  1000)
+                                                              .toString()) +
+                                                      " tonna"
+                                                  : TreeNumber.toProcessCost(
+                                                          provider.items[index]
+                                                                  ["amount"]
+                                                              .toString()) +
+                                                      " kg",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: MainColors.fromHex(
+                                                      MainColors.colorBlack)),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "Qiymati:",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: MainColors.fromHex(
+                                                      "#8896A1")),
+                                            ),
+                                            SizedBox(height: 1),
+                                            Text(
+                                              provider.items[index]["sum"] >
+                                                      1000000
+                                                  ? TreeNumber.toProcessCost(
+                                                          (provider.items[index]
+                                                                      ["sum"] /
+                                                                  1000000)
+                                                              .toString()) +
+                                                      " mln"
+                                                  : TreeNumber.toProcessCost(
+                                                          provider.items[index]
+                                                                  ["sum"]
+                                                              .toString()) +
+                                                      " so'm",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: MainColors.fromHex(
+                                                      MainColors.colorBlack)),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  DottedLine(
+                                      dashColor: Colors.grey.withOpacity(0.6)),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Yaratilgan sana:",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: MainColors.fromHex(
+                                                      "#8896A1")),
+                                            ),
+                                            SizedBox(height: 1),
+                                            Text(
+                                              provider.items[index]
+                                                      ["created_date"]
+                                                  .toString()
+                                                  .substring(0, 10),
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: MainColors.fromHex(
+                                                      MainColors.colorBlack)),
+                                            )
+                                          ],
+                                        ),
                                         SvgPicture.asset(
-                                          "assets/images/nomer.svg",
-                                          height: 14,
+                                          "assets/images/leftright.svg",
+                                          //height: 14,
                                         ),
-                                        Text(
-                                            provider.items[index]["id"]
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w700,
-                                                color: MainColors.fromHex(
-                                                    MainColors.colorBlack)))
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "Daromad sana:",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: MainColors.fromHex(
+                                                      "#8896A1")),
+                                            ),
+                                            SizedBox(height: 1),
+                                            Text(
+                                              provider.items[index]["pay_date"],
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: MainColors.fromHex(
+                                                      MainColors.colorBlack)),
+                                            )
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  )
+                                ],
                               ),
-                              SizedBox(height: 20),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Miqdori:",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: MainColors.fromHex(
-                                                  "#8896A1")),
-                                        ),
-                                        SizedBox(height: 1),
-                                        Text(
-                                          TreeNumber.toProcessCost(provider
-                                                  .items[index]["amount"]
-                                                  .toString()) +
-                                              " kg",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w700,
-                                              color: MainColors.fromHex(
-                                                  MainColors.colorBlack)),
-                                        )
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "Qiymati:",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: MainColors.fromHex(
-                                                  "#8896A1")),
-                                        ),
-                                        SizedBox(height: 1),
-                                        Text(
-                                          TreeNumber.toProcessCost((provider
-                                                          .items[index]["sum"] /
-                                                      1000000)
-                                                  .toString()) +
-                                              " mln",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w700,
-                                              color: MainColors.fromHex(
-                                                  MainColors.colorBlack)),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              DottedLine(
-                                  dashColor: Colors.grey.withOpacity(0.6)),
-                              SizedBox(height: 10),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Yaratilgan sana:",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: MainColors.fromHex(
-                                                  "#8896A1")),
-                                        ),
-                                        SizedBox(height: 1),
-                                        Text(
-                                          provider.items[index]["created_date"]
-                                              .toString()
-                                              .substring(0, 10),
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w700,
-                                              color: MainColors.fromHex(
-                                                  MainColors.colorBlack)),
-                                        )
-                                      ],
-                                    ),
-                                    SvgPicture.asset(
-                                      "assets/images/leftright.svg",
-                                      //height: 14,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "Daromad sana:",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: MainColors.fromHex(
-                                                  "#8896A1")),
-                                        ),
-                                        SizedBox(height: 1),
-                                        Text(
-                                          provider.items[index]["pay_date"],
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w700,
-                                              color: MainColors.fromHex(
-                                                  MainColors.colorBlack)),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      })),
+                            );
+                          })),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.of(context)

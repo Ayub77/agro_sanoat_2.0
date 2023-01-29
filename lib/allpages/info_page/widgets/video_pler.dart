@@ -23,10 +23,25 @@ class VideoPlyer extends StatelessWidget {
     );
     return Scaffold(
       backgroundColor: MainColors.fromHex(MainColors.colorGreyDark),
-      body: Center(
-        child: YoutubePlayerIFrame(
-          controller: controller,
-        ),
+      body: Stack(
+        children: [
+          Center(
+            child: YoutubePlayerIFrame(
+              controller: controller,
+            ),
+          ),
+          Positioned(
+              top: 20,
+              left: 10,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: MainColors.fromHex(MainColors.colorGreen),
+                  )))
+        ],
       ),
     );
   }
