@@ -160,7 +160,7 @@ class _MyInfoState extends State<MyInfo> {
                         InkWell(
                             onTap: () {
                               provider.launchURL(
-                                "https://www.youtube.com/channel/UC5hYVWVzP8WtY7JBddLvfK",
+                                "https://youtube.com/@Yoshfermerlar",
                               );
                             },
                             child:

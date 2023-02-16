@@ -1,4 +1,4 @@
-package com.example.agro_sanoat
+package com.yoshfermer.agro_sanoat
 
 import io.flutter.embedding.android.FlutterActivity
 
