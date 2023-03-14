@@ -47,11 +47,14 @@ class _BenifitPageState extends State<BenifitPage> {
                           color: MainColors.fromHex(MainColors.colorWhite)),
                     ),
                     actions: [
-                      IconButton(
-                          onPressed: () {
-                            provider.selectDate(context);
-                          },
-                          icon: SvgPicture.asset("assets/images/filter.svg"))
+                      provider.dataMap.isEmpty
+                          ? SizedBox()
+                          : IconButton(
+                              onPressed: () {
+                                provider.selectDate(context);
+                              },
+                              icon:
+                                  SvgPicture.asset("assets/images/filter.svg"))
                     ],
                   ),
                   body: provider.loading
@@ -61,7 +64,7 @@ class _BenifitPageState extends State<BenifitPage> {
                               height: double.infinity,
                               alignment: Alignment.center,
                               child: Text(
-                                "ma'lumot mavjud emas",
+                                "Ma'lumot mavjud emas!",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w600),
                               ),

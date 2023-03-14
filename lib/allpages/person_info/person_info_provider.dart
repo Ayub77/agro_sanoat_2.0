@@ -126,7 +126,6 @@ class PersonInfoProvider extends ChangeNotifier {
       };
       var response = await HttpService.PUT(HttpConstant.editPerson, param);
       if (response["status"] == HttpConnection.data) {
-        
         EasyLoading.dismiss();
         AwesomeDialog(
           context: context,

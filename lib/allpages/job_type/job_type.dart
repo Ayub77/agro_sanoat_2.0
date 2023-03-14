@@ -47,12 +47,23 @@ class _JobTypeState extends State<JobType> {
           ),
           body: provider.loading
               ? Loading()
-              : Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  child: pieChart(),
-                ),
+              : provider.dataMap.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Ma'lumotlar mavjud emas!",
+                        style: TextStyle(
+                            color: MainColors.fromHex(MainColors.colorBlack),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    )
+                  : Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      child: pieChart(),
+                    ),
         ),
       ),
     );

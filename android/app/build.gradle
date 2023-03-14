@@ -35,7 +35,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 33
-
+     ndkVersion "21.3.6528147" 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -53,8 +53,8 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.yoshfermer.agro_sanoat"
         minSdkVersion 20
-        targetSdkVersion 31
-        versionCode 3
+        targetSdkVersion 33
+        versionCode 9
         versionName flutterVersionName
     }
 
@@ -69,6 +69,9 @@ android {
    buildTypes {
        release {
            signingConfig signingConfigs.release
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE'
+            }
        }
    }
    lintOptions {

@@ -9,7 +9,7 @@ import 'package:hive_flutter/adapters.dart';
 
 class ProjectPageProvider extends ChangeNotifier {
   List items = [];
-  bool loading = false;
+  bool loading = true;
   onStart() async {
     Box box = await Hive.openBox("db");
     var newsJson = await box.get("projects");

@@ -58,24 +58,34 @@ class _NewsPageState extends State<NewsPage> {
             onRefresh: () async {
               provider.refresh();
             },
-            child: Stack(
-              children: [
-                ListView.builder(
-                    itemCount: provider.items.length,
-                    physics: BouncingScrollPhysics(),
-                    controller: provider.controller,
-                    itemBuilder: (context, index) {
-                      return ListWidgetNews(
-                        item: provider.items[index],
-                        size: size,
-                        ontap: (value) {
-                          provider.bigView(context, value);
-                        },
-                      );
-                    }),
-                Visibility(visible: provider.loading, child: Loading())
-              ],
-            ),
+            child: provider.items.isEmpty
+                ? Center(
+                    child: Text(
+                      "Ma'lumotlar mavjud emas!",
+                      style: TextStyle(
+                          color: MainColors.fromHex(MainColors.colorBlack),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  )
+                : Stack(
+                    children: [
+                      ListView.builder(
+                          itemCount: provider.items.length,
+                          physics: BouncingScrollPhysics(),
+                          controller: provider.controller,
+                          itemBuilder: (context, index) {
+                            return ListWidgetNews(
+                              item: provider.items[index],
+                              size: size,
+                              ontap: (value) {
+                                provider.bigView(context, value);
+                              },
+                            );
+                          }),
+                      Visibility(visible: provider.loading, child: Loading())
+                    ],
+                  ),
           ),
         ),
       ),

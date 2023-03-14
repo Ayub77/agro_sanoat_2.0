@@ -10,8 +10,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class InfoPageProvider extends ChangeNotifier {
   List items = [];
   List itemsVideo = [];
-  bool loading1 = false;
-  bool loading2 = false;
+  bool loading1 = true;
+  bool loading2 = true;
 
   int index = 0;
   onStart1() async {
@@ -61,5 +61,8 @@ class InfoPageProvider extends ChangeNotifier {
     Navigator.of(context).pushNamed(RouteGeneration.video, arguments: videoId);
   }
 
-  chooseChange(value) {}
+  chooseChange(value) {
+    index = value;
+    notifyListeners();
+  }
 }

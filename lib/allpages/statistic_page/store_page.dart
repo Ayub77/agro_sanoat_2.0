@@ -78,7 +78,7 @@ class _StorePageState extends State<StorePage> {
                   height: size.height,
                   alignment: Alignment.center,
                   child: Text(
-                    "ma'lumot mavjud emas",
+                    "Ma'lumot mavjud emas!",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 )

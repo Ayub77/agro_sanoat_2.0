@@ -76,27 +76,51 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ],
                   views: [
-                    Stack(
-                      children: [
-                        InfoWidgetStock(
-                            items: provider.items,
-                            ontab: (item) {
-                              provider.bigView(context, item);
-                            }),
-                        Visibility(visible: provider.loading1, child: Loading())
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        VideoInfo(
-                          items: provider.itemsVideo,
-                          ontap: (videoUrl) {
-                            provider.openVideo(videoUrl, context);
-                          },
-                        ),
-                        Visibility(visible: provider.loading2, child: Loading())
-                      ],
-                    ),
+                    provider.items.isEmpty && !provider.loading1
+                        ? Center(
+                            child: Text(
+                              "Ma'lumotlar mavjud emas!",
+                              style: TextStyle(
+                                  color:
+                                      MainColors.fromHex(MainColors.colorBlack),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          )
+                        : Stack(
+                            children: [
+                              InfoWidgetStock(
+                                  items: provider.items,
+                                  ontab: (item) {
+                                    provider.bigView(context, item);
+                                  }),
+                              Visibility(
+                                  visible: provider.loading1, child: Loading())
+                            ],
+                          ),
+                    provider.itemsVideo.isEmpty && !provider.loading2
+                        ? Center(
+                            child: Text(
+                              "Ma'lumotlar mavjud emas!",
+                              style: TextStyle(
+                                  color:
+                                      MainColors.fromHex(MainColors.colorBlack),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          )
+                        : Stack(
+                            children: [
+                              VideoInfo(
+                                items: provider.itemsVideo,
+                                ontap: (videoUrl) {
+                                  provider.openVideo(videoUrl, context);
+                                },
+                              ),
+                              Visibility(
+                                  visible: provider.loading2, child: Loading())
+                            ],
+                          ),
                   ],
                   onChange: (index) {
                     provider.chooseChange(index);

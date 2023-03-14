@@ -52,25 +52,36 @@ class _ProjectPageState extends State<ProjectPage> {
                         color: Colors.green),
                   ),
                 ),
-                body: Stack(
-                  children: [
-                    RefreshIndicator(
-                      onRefresh: () async {
-                        provider.refresh();
-                      },
-                      child: ListView.builder(
-                          itemCount: provider.items.length,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: ((context, index) => ListVidget(
-                                size: size,
-                                item: provider.items[index],
-                                ontap: (value) {
-                                  provider.bigView(context, value);
-                                },
-                              ))),
-                    ),
-                    Visibility(visible: provider.loading, child: Loading())
-                  ],
-                ))));
+                body: provider.items.isEmpty && !provider.loading
+                    ? Center(
+                        child: Text(
+                          "Ma'lumotlar mavjud emas!",
+                          style: TextStyle(
+                              color: MainColors.fromHex(MainColors.colorBlack),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      )
+                    : Stack(
+                        children: [
+                          RefreshIndicator(
+                            onRefresh: () async {
+                              provider.refresh();
+                            },
+                            child: ListView.builder(
+                                itemCount: provider.items.length,
+                                physics: BouncingScrollPhysics(),
+                                itemBuilder: ((context, index) => ListVidget(
+                                      size: size,
+                                      item: provider.items[index],
+                                      ontap: (value) {
+                                        provider.bigView(context, value);
+                                      },
+                                    ))),
+                          ),
+                          Visibility(
+                              visible: provider.loading, child: Loading())
+                        ],
+                      ))));
   }
 }

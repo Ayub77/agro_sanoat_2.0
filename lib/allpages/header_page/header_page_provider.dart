@@ -10,7 +10,10 @@ import 'package:hive_flutter/adapters.dart';
 
 class HeaderPageProvider extends ChangeNotifier {
   //final List<PricePoint> points=[];
-  bool loading = false;
+  bool allItemsEmpty = false;
+  bool loading1 = false;
+  bool loading2 = false;
+  bool loading3 = false;
   late BuildContext thiscontext;
   PageController infoController = PageController();
   PageController newsController = PageController();
@@ -22,25 +25,68 @@ class HeaderPageProvider extends ChangeNotifier {
   List itemInfo = [];
   List itemService = [];
   onStart(context) async {
-    loading = true;
+    loading1 = true;
+    loading2 = true;
+    loading3 = true;
     notifyListeners();
     thiscontext = context;
     Box box = await Hive.openBox("db");
-    var infoJson = await box.get("info");
+    var infoJson = await box.get("infos");
     if (infoJson != null) {
       itemInfo = json.decode(infoJson) as List;
+      loading2 = false;
+      notifyListeners();
+    } else {
+      loading2 = false;
+      notifyListeners();
+      // var infoResponse = await HttpService.GET(HttpConstant.foydalanish);
+      // if (infoResponse["status"] == HttpConnection.data) {
+      //   itemInfo = infoResponse["data"];
+      //   Box box = await Hive.openBox("db");
+      //   box.put("infos", json.encode(infoResponse["data"]));
+      //   loading2 = false;
+      //   notifyListeners();
+      // }
     }
-    var newsJson = await box.get("new");
+    var newsJson = await box.get("news");
     if (newsJson != null) {
       itemNews = jsonDecode(newsJson) as List;
+      loading1 = false;
+      notifyListeners();
+    } else {
+      loading1 = false;
+      notifyListeners();
+      // var newsResponse = await HttpService.GET(HttpConstant.yangilaklar);
+      // if (newsResponse["status"] == HttpConnection.data) {
+      //   itemNews = newsResponse["data"];
+      //   Box box = await Hive.openBox("db");
+      //   box.put("news", json.encode(newsResponse["data"]));
+      //   loading1 = false;
+      //   notifyListeners();
+      //}
     }
+
     var serviceJson = await box.get("service");
     if (serviceJson != null) {
       itemService = jsonDecode(serviceJson) as List;
+      loading3 = false;
+      notifyListeners();
+    } else {
+      loading3 = false;
+      notifyListeners();
+      // var serviceResponse = await HttpService.GET(HttpConstant.xizmatlar);
+      // if (serviceResponse["status"] == HttpConnection.data) {
+      //   itemService = serviceResponse["data"];
+      //   Box box = await Hive.openBox("db");
+      //   box.put("service", json.encode(serviceResponse["data"]));
+      //   loading3 = false;
+      //   notifyListeners();
+      // }
     }
-
-    loading = false;
-    notifyListeners();
+    if (itemInfo.isEmpty && itemNews.isEmpty && itemService.isEmpty) {
+      allItemsEmpty = true;
+      notifyListeners();
+    }
   }
 
   nextInfo(context) async {

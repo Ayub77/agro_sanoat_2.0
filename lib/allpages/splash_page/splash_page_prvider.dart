@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:agro_sanoat/http_service/http_constant.dart';
 import 'package:agro_sanoat/http_service/http_service.dart';
 import 'package:agro_sanoat/route_generation/route_generation.dart';
@@ -23,40 +22,42 @@ class SplashPageProvider extends ChangeNotifier {
     box.put("st1", null);
     box.put("st2", null);
     box.put("service", null);
+
     //box.put("person", null);
-    Timer(const Duration(milliseconds: 400), () {
+    Timer(const Duration(milliseconds: 300), () {
       a = true;
       notifyListeners();
     });
-    Timer(const Duration(milliseconds: 400), () {
+    Timer(const Duration(milliseconds: 300), () {
       b = true;
       notifyListeners();
     });
-    Timer(const Duration(milliseconds: 1300), () {
+    Timer(const Duration(milliseconds: 1200), () {
       c = true;
       notifyListeners();
     });
-    Timer(const Duration(milliseconds: 1700), () {
+    Timer(const Duration(milliseconds: 1600), () {
       e = true;
       notifyListeners();
     });
-    Timer(const Duration(milliseconds: 3400), () async {
-      var respons = await HttpService.GET(HttpConstant.yangilaklar);
-      if (respons["status"] == HttpConnection.data) {
-        Box box = await Hive.openBox("db");
-        box.put("new", json.encode(respons["data"]));
-      }
-      var response = await HttpService.GET(HttpConstant.foydalanish);
-      if (response["status"] == HttpConnection.data) {
-        Box box = await Hive.openBox("db");
-        box.put("info", json.encode(response["data"]));
-      }
-      var res = await HttpService.GET(HttpConstant.xizmatlar);
-      if (res["status"] == HttpConnection.data) {
-        Box box = await Hive.openBox("db");
-        box.put("service", json.encode(response["data"]));
-      }
+    Timer(const Duration(milliseconds: 3300), () async {
       d = true;
+
+      var newsResponse = await HttpService.GET(HttpConstant.yangilaklar);
+      if (newsResponse["status"] == HttpConnection.data) {
+        Box box = await Hive.openBox("db");
+        box.put("news", json.encode(newsResponse["data"]));
+      }
+      var serviceResponse = await HttpService.GET(HttpConstant.xizmatlar);
+      if (serviceResponse["status"] == HttpConnection.data) {
+        Box box = await Hive.openBox("db");
+        box.put("service", json.encode(serviceResponse["data"]));
+      }
+      var infoResponse = await HttpService.GET(HttpConstant.foydalanish);
+      if (infoResponse["status"] == HttpConnection.data) {
+        Box box = await Hive.openBox("db");
+        box.put("infos", json.encode(infoResponse["data"]));
+      }
       notifyListeners();
       nextPage(context);
     });

@@ -1,5 +1,5 @@
 class HttpConstant {
-  static String mainUrl = "208.85.23.14:8070";
+  static String mainUrl = "84.54.115.14:8071";
   static String additional = "/api/";
   static String murojat = "${additional}appeals";
   static String activites = "${additional}product-types/client-mobile/get";
