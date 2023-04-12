@@ -1,5 +1,6 @@
 class HttpConstant {
   static String mainUrl = "84.54.115.14:8071";
+  static String mainImageUrl = "http://84.54.115.14:8071/api/file/view?uuid=";
   static String additional = "/api/";
   static String murojat = "${additional}appeals";
   static String activites = "${additional}product-types/client-mobile/get";

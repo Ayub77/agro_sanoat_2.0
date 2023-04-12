@@ -54,7 +54,7 @@ android {
         applicationId "com.yoshfermer.agro_sanoat"
         minSdkVersion 20
         targetSdkVersion 33
-        versionCode 9
+        versionCode 10
         versionName flutterVersionName
     }
 

@@ -3,6 +3,7 @@
 import 'package:agro_sanoat/allpages/animation_loading/loading.dart';
 import 'package:agro_sanoat/allpages/person_info/person_info_provider.dart';
 import 'package:agro_sanoat/funcsions/main_colors.dart';
+import 'package:agro_sanoat/http_service/http_constant.dart';
 import 'package:agro_sanoat/object/type_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -107,8 +108,7 @@ class _PersonInfoState extends State<PersonInfo> with TickerProviderStateMixin {
                                   MainColors.fromHex(MainColors.colorGreySoft)),
                           child: CachedNetworkImage(
                             imageUrl:
-                                "http://208.85.23.14:8070/api/file/view?uuid=" +
-                                    provider.imageUrl,
+                                HttpConstant.mainImageUrl + provider.imageUrl,
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
